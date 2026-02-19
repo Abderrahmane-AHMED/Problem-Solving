@@ -255,24 +255,123 @@ class ProblemSolving
 
     #region Problem 8 Sum Of 3 Number 
 
-    static int ReadOf3Number()
+    static int[] ReadOf3Number()
     {
         int[] Number = new int[3];
 
-        for (int i = 0; i < Number.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             Console.WriteLine($"Please Inter Number {i + 1} ?");
             Number[i] = Convert.ToInt32(Console.ReadLine());
         }
-        return Number.Length;
+        return Number;
     }
-    static int SumOf3Number(int Number)
+    static int SumOf3Number(int[] Number)
     {
-        return Number++;
+        int sum = 0;
+        for(int i = 0; i < Number.Length; i++)
+        {
+            sum += Number[i];
+        }
+      
+        return sum;
     }
-    static void PrintOf3Number(int Number)
+    static void PrintOf3Number(int[] Number , int Result)
     {
-        Console.WriteLine($"The Sum Of 3 Number Is {Number}");
+        Console.WriteLine($"The Sum Of ( {Number[0]} + {Number[1]} + {Number[2]} ) Is {Result}");
+    }
+    #endregion
+
+    #region Problem 9 Average Of 3 Marks Case 1
+     static float[] ReadOf3Marks()
+    {
+        float[] Marks = new float[3];
+        for(int i = 0; i < 3;i++)
+        {
+            Console.WriteLine($"Plaese Enter Mark {i + 1} ?");
+            Marks[i] = Convert.ToInt64(Console.ReadLine());
+        }
+        return Marks;
+    }
+    static float CalculatAverageOf3Marks(float[] Marks)
+    {
+        float Average = 0;
+        for (int i = 0; i < Marks.Length; i++) 
+        {
+            Average += Marks[i];
+        }
+        return(Average/3);
+
+    }
+    static void PrintAverageOf3Marks(float[] Marks , float Average)
+    {
+        Console.WriteLine($"The Average Of {Marks[0]} + {Marks[1]} + {Marks[2]}  is {Average} ");
+    }
+    #endregion
+
+    #region Problem 10 Average Of 3 Marks Case 2 Pass Or Fail 
+    enum enAverageOf3MarksPassOrFail { Pass = 1 , Fail = 0}
+    static enAverageOf3MarksPassOrFail CheckAverage(float Average)
+    {
+        if (Average >= 50)
+            return enAverageOf3MarksPassOrFail.Pass;
+        else
+            return enAverageOf3MarksPassOrFail.Fail;
+    }
+    static void PrintAveragOf3MarksPassOrFail(float[] Marks , float Average , enAverageOf3MarksPassOrFail Resulte )
+    {
+        Console.WriteLine($"The Average Of {Marks[0]} + {Marks[1]} + {Marks[2]} = {Average} You Are {Resulte}");
+    }
+    #endregion
+
+    #region Problem 11 Max Of 2 Number 
+     
+    static int[] Read2Number()
+    {
+        int[] Number = new int[2];
+        for(int i = 0; i < 2 ; i++)
+        {
+            Console.WriteLine($"Please Enter Number {i + 1} ?");
+            Number[i] = Convert.ToInt32( Console.ReadLine() );
+        }
+        return Number;
+    }
+    static int CheckMaxNumber(int[] Number)
+    {
+  
+        return (Number[0] < Number[1]  ? Number[1] : Number[0]);
+    }
+    static void PrintMaxOf2Number(int[] Number , int Max)
+    {
+             Console.WriteLine ($"The Max Of  {Number[0]} , {Number[1]}   is {Max} ");
+    }
+    #endregion
+    #region Max Of 3 Number 
+
+    static int[] Read3Number()
+    {
+        int[] Number = new int[3];
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine($"Please Enter Number {i + 1} ?");
+            Number[i] = Convert.ToInt32(Console.ReadLine());
+        }
+        return Number;
+    }
+    static int CheckMaxOf3Number(int[] Number)
+    {
+         int max = Number[0];
+        for (int i = 0; i < Number.Length; i++)
+        {
+            if (Number[i] > max)
+            max = Number[i];
+                
+        }
+        return max;
+    }
+    static void PrintMaxOf3Number(int[] Number, int Max)
+    {
+        Console.WriteLine($"The Max Of  {Number[0]} , {Number[1]}  , {Number[2]}  is {Max} ");
     }
     #endregion
     static void Main(string[] Args)
@@ -319,6 +418,42 @@ class ProblemSolving
         //PrintPassOrFail(Mark, Result);
 
         //Problem 8 Sum Of 3 Number 
+
+        //int[] Number = new int[3];
+        //Number = ReadOf3Number();
+        //int Sum = SumOf3Number(Number);
+        //PrintOf3Number(Number , Sum);
+
+        //Problem 9 Average Of 3 Marks Case 1
+
+        //float[] Marks = new float[3];
+        //Marks = ReadOf3Marks();
+        //float Average = CalculatAverageOf3Marks(Marks);
+        //PrintAverageOf3Marks(Marks , Average);
+
+        //Problem 10 Average Of 3 Marks Case 2 Pass Or Fail 
+
+        //float[] Marks = new float[3];
+        //Marks = ReadOf3Marks();
+        //float Average = CalculatAverageOf3Marks(Marks);
+        //enAverageOf3MarksPassOrFail Result = CheckAverage(Average);
+        //PrintAveragOf3MarksPassOrFail(Marks, Average, Result);
+
+        //Problem 11 Max Of 2 Number 
+
+        //int[] Number = new int[2];
+        //Number = Read2Number();
+        //int Max = CheckMaxNumber(Number);
+        //PrintMaxOf2Number (Number, Max);
+
+
+        //Problem 12 Max Of 2 Number 
+
+        int[] Number = new int[3];
+        Number = Read3Number();
+        int Max = CheckMaxOf3Number (Number);
+        PrintMaxOf3Number(Number, Max);
+
 
     }
 }
