@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.ComponentModel.Design;
+using System.Numerics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class ProblemSolving
@@ -346,7 +347,8 @@ class ProblemSolving
              Console.WriteLine ($"The Max Of  {Number[0]} , {Number[1]}   is {Max} ");
     }
     #endregion
-    #region Max Of 3 Number 
+
+    #region Problem 12  Max Of 3 Number 
 
     static int[] Read3Number()
     {
@@ -372,6 +374,98 @@ class ProblemSolving
     static void PrintMaxOf3Number(int[] Number, int Max)
     {
         Console.WriteLine($"The Max Of  {Number[0]} , {Number[1]}  , {Number[2]}  is {Max} ");
+    }
+    #endregion
+
+    #region Problem 13 Swap Number 
+    static int[] Read2NumberForSwap()
+    {
+        int[] Number = new int[2];
+
+        for(int i = 0; i < 2; i++)
+        {
+            Console.WriteLine($"Please Enter A Number {i + 1} ?");
+            Number[i] = Convert.ToInt32 (Console.ReadLine());
+        }
+
+        return Number;
+    }
+    static int[] Swap2Number(int[] Number)
+    {
+       
+        int[] Swap  = (int[])Number.Clone() ;
+        int Temp;
+        Temp = Swap[0];
+        Swap[0] = Swap[1];
+        Swap[1] = Temp;
+
+        return Swap;
+
+    }
+    static void PrintSwap(int[] Number , int[] Swap)
+    {
+        Console.WriteLine($"Your Number Is {Number[0]} And {Number[1]} \n\nAftar Swap Is {Swap[0]} And {Swap[1]} ");
+    }
+
+
+    #endregion
+
+    #region Problem 14 Rectangle Area   
+    static float[] ReadRectangleArea()
+    {
+        float[] Number = new float[2];
+        for(int i = 0; i < 2;i++)
+        {
+            if (i == 0)
+                Console.WriteLine("Please Enter A Width Of Area ?");
+            else
+                Console.WriteLine("Please Enter A Heigth Of Area ?");
+
+            Number[i] = Convert.ToSingle(Console.ReadLine());
+        }
+        return Number;
+    }
+    static float CalculetRectangleArea(float[] Number)
+    {
+        float Area = (Number[0] * Number[1]);
+        return Area;
+    }
+    static void PrintRectangleArea(float[] Number , float Area)
+    {
+        Console.WriteLine($"The Rectangle Area For Width {Number[0]} And Heigth {Number[1]}  =  {Area}");
+    }
+    #endregion
+
+    #region Problem 15 Circle Area Arbitrary Triangle
+    static float[] ReadCircleAreaArbitraryTriangle()
+    {
+        float[] Number = new float[3];
+        string[] Prompts = { "a", "b", "c" };
+        for(int i = 0;i < 3;i++)
+        {
+            Console.WriteLine($"Please Enter A Circle Area {Prompts[i]}");
+            Number[i] = Convert.ToInt64 (Console.ReadLine());
+        }
+        return Number;
+    }
+    static double CalculteCircleArea(float[] Number)
+    {
+        const double PI = 3.141;
+        double a = Number[0];
+        double b = Number[1];
+        double c = Number[2];
+
+        double P = (Number[0] + Number[1] + Number[2]) / 2;
+        double T = (Number[0] * Number[1] * Number[2])/ (4 * Math.Sqrt ( P* (P-Number[0]) * (P-Number[1]) * (P-Number[2])));
+
+        double Area = PI * Math.Pow(T, 2);
+        return Area;
+
+    }
+    
+    static void PrintCircleAreaArbitraryTriangle(float[] Number , double CircleArea)
+    {
+        Console.WriteLine($"The Circle Area Arbitrary Triangle a = {Number[0]} , b = {Number[1]} , c = {Number[2]} = {CircleArea} ");
     }
     #endregion
     static void Main(string[] Args)
@@ -449,11 +543,31 @@ class ProblemSolving
 
         //Problem 12 Max Of 2 Number 
 
-        int[] Number = new int[3];
-        Number = Read3Number();
-        int Max = CheckMaxOf3Number (Number);
-        PrintMaxOf3Number(Number, Max);
+        //int[] Number = new int[3];
+        //Number = Read3Number();
+        //int Max = CheckMaxOf3Number (Number);
+        //PrintMaxOf3Number(Number, Max);
 
+        //Problem 13 Swap 2 Number 
+
+        //int[] Number = new int[2];
+        //Number = Read2NumberForSwap();
+        //int[] Swap = Swap2Number(Number);
+        //PrintSwap(Number, Swap);
+
+        //Problem 14 Rectangle Area 
+
+        //float[] Number = new float[2];
+        //Number = ReadRectangleArea();
+        //float Area = CalculetRectangleArea(Number);
+        //PrintRectangleArea(Number, Area);
+
+        //Problem 15 Circle Area Arbitrary Triangle
+
+        float[] Number = new float[3];
+        Number = ReadCircleAreaArbitraryTriangle();
+        double Result = CalculteCircleArea(Number);
+        PrintCircleAreaArbitraryTriangle(Number , Result);
 
     }
 }
