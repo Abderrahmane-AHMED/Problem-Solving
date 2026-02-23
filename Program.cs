@@ -468,6 +468,185 @@ class ProblemSolving
         Console.WriteLine($"The Circle Area Arbitrary Triangle a = {Number[0]} , b = {Number[1]} , c = {Number[2]} = {CircleArea} ");
     }
     #endregion
+
+    #region Problem 16 Validate Age Case 1
+   
+    static int ReadAge()
+    {
+        int Age;
+        bool IsValid;
+        do
+        {
+            Console.WriteLine("Please Enter Your Age ?");
+
+            IsValid = int.TryParse(Console.ReadLine(), out Age);
+
+            if(!IsValid)
+            {
+                Console.WriteLine(":-(  Please Entar A Valid Age ( Number ) ?");
+            }
+          
+        } while (!IsValid || Age <= 0);
+        return Age;
+    }
+    static bool IsValidAge(int Age)
+    {
+        return (Age >= 18 && Age <= 45);
+    }
+    static void PrintResultValidOrInValid(int Age )
+    {
+        
+        if(IsValidAge(Age))
+        Console.WriteLine($"Your Age {Age} Is A Valid You :-)  ");
+        else
+        Console.WriteLine($"Your Age {Age} Is A Invalid :-( ");
+    }
+    #endregion
+
+    #region Problem 17 Validate Age Case 2
+    static short ReadAgeCase2()
+    {
+
+        short Age;
+        bool IsValid;
+        do
+        {
+            Console.WriteLine("Please ENter Your Age Between 18 and 45 ?");
+            IsValid = short.TryParse(Console.ReadLine(), out Age);
+            if (!IsValid || Age < 18 || Age > 45)
+                Console.WriteLine("InValid Age :-( ");
+        } while (!IsValid || Age < 18 || Age > 45);
+
+
+        Console.WriteLine("Please ENter Your Age Between 18 and 45 ?");
+
+        while (!short.TryParse(Console.ReadLine() , out Age) ||Age < 18 || Age > 45 )
+        {
+            Console.WriteLine("Please ENter Your Age Between 18 and 45 ?");
+         
+        }
+        return Age;
+    }
+    #endregion
+
+    #region Problem 18 Print Number From 1 To N
+    static int ReadNumberForLoop()
+    {
+        int Number;
+
+        Console.WriteLine("Please Enter A Number ?");
+
+        while(!int.TryParse(Console.ReadLine(), out Number) || Number <= 0)
+        {
+            Console.WriteLine("Please Enter A Positive Number ");
+        }
+        return Number;
+    }
+    static void PrintResultForLoop(int Number)
+    {
+        Console.WriteLine("For Loop Statement ");
+        for (int i = 1; i <= Number; i++)
+        {
+            Console.WriteLine(i);
+        }
+
+        Console.WriteLine("While Loop Statement ");
+        int j = 1;
+        while (j <= Number)
+        {
+            Console.WriteLine(j);
+            j++;
+       
+        }
+        Console.WriteLine("Do While Loop Statement ");
+        int k = 1;
+        do
+        {
+            Console.WriteLine(k);
+            k++;
+        }while (k <= Number);
+       
+    }
+    #endregion
+
+    #region Problem 19 Sum Odd Number From 1 To N
+    static void PrintSumOddNumber(int Number) 
+    {
+        Console.WriteLine("For Loop Statement ");
+        int Sum = 0;
+        for(int i = 1;i <= Number;i++)
+        {
+            if (i % 2 != 0)
+            {
+                Sum += i;
+            }
+          
+        }
+        Console.WriteLine(Sum);
+
+        Console.WriteLine("While Loop Statement ");
+
+        int j = 1;
+        int SumWhile = 0;
+        while(j <= Number)
+        {
+            if(j % 2 != 0)
+            {
+                SumWhile += j;
+            }
+            j++;
+        }
+        Console.WriteLine(SumWhile);
+
+        Console.WriteLine("Do While Loop Statement ");
+        int k = 1;
+        int SumDoWhile = 0;
+        do
+        {
+         if(k % 2 != 0)
+            {
+                SumDoWhile += k;
+            }
+         k++;
+        }while (k <= Number);
+
+               
+        Console.WriteLine(SumDoWhile);
+    }
+    #endregion
+
+    #region Problem 20 Factorial Of N 
+    static void PrintFactorialOfN(int Number)
+    {
+        Console.WriteLine("For Loop Statement");
+        int factorial = 1;
+        for(int i = Number ; i >= 1; i--)
+        {
+            factorial *= i;
+        }
+        Console.WriteLine(factorial);
+
+        Console.WriteLine("While Loop Statement");
+        int j = 1;
+        while(j >= Number)
+        {
+            factorial *= j;
+            j--;
+        }
+        Console.WriteLine(factorial);
+
+        Console.WriteLine("Do While Loop Statement");
+        int k = 1;
+        do
+        {
+            factorial *= k;
+            k--;
+        }while (k >= Number);
+
+        Console.WriteLine(factorial);
+    }
+
+    #endregion
     static void Main(string[] Args)
     {
 
@@ -564,10 +743,33 @@ class ProblemSolving
 
         //Problem 15 Circle Area Arbitrary Triangle
 
-        float[] Number = new float[3];
-        Number = ReadCircleAreaArbitraryTriangle();
-        double Result = CalculteCircleArea(Number);
-        PrintCircleAreaArbitraryTriangle(Number , Result);
+        //float[] Number = new float[3];
+        //Number = ReadCircleAreaArbitraryTriangle();
+        //double Result = CalculteCircleArea(Number);
+        //PrintCircleAreaArbitraryTriangle(Number , Result);
 
+        //Problem 16 Validate Age Case 1 
+
+        //int Age = ReadAge();
+        //PrintResultValidOrInValid (Age);
+
+        //Problem 17 Validate Age Case 1 
+
+        //short Age = ReadAgeCase2();
+
+        //Problem 18 Print Number From 1 To N
+
+        //int Number = ReadNumberForLoop();
+        //PrintResultForLoop(Number);
+
+        //Problem 19 Print Sum Odd Number From 1 To N
+
+        //int Number = ReadNumberForLoop();
+        //PrintSumOddNumber (Number);
+
+        //Problem 20 Factorial Of N
+
+        int Number = ReadNumberForLoop();
+        PrintFactorialOfN (Number);
     }
 }
