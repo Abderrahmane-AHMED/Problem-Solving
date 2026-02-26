@@ -27,12 +27,12 @@ class ProblemSolving
     static int ReadPositiveNumber()
     {
         int Number;
-        do
+        Console.WriteLine("Plase Enter A Positive Number ?");
+         while(!int.TryParse(Console.ReadLine(), out Number) || Number < 0)
         {
-            Console.WriteLine("Plase Enter A Positive Number ?");
-            Number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("-:( Plase Enter A Positive Number ?");
+        }
 
-        } while (Number < 0);
         return Number;
     }
     static OddOrEven CheckNumber(int Number)
@@ -645,7 +645,173 @@ class ProblemSolving
 
         Console.WriteLine(factorial);
     }
+    #endregion
 
+    #region Problem 21 Power  Of 2 : 3 : 4
+
+
+    static int[] PowerOfNumber(int Number)
+    {
+        int[] Power= new  int  [3];
+        int Result = Number;
+        
+         for(int i = 0; i < 3 ; i++)
+        {
+            Result  *= Number;
+            Power[i] = Result;
+
+        }
+         return Power;
+    }
+    static void PrintPowerOf(int[] Power)
+    {
+        Console.WriteLine($"Power Of 1 = {Power[0]} \nPower Of 2 = {Power[1]} \nPower Of 3 = {Power[2]}");
+    }
+
+    #endregion
+
+    #region Problem 22 Power Of Number
+    static int[] ReadNumberForPower()
+    {
+        int[] Number = new int[2];
+        string[] Prompts = { "Number", "Power" };
+
+        for(int i = 0; i < 2; i++)
+        {
+            Console.WriteLine($"Please enter A {Prompts[i]} ?");
+            Number[i] = Convert.ToInt32 ( Console.ReadLine() );
+        }
+        return Number;
+    }
+    static int PowerNumberOfN(int[] Number)
+    {
+        int Power = 1;
+       
+        if (Number[1] == 0)
+        {
+           return  1;
+        }
+        for(int i = 0; i < Number[1]; i++)
+        {
+            Power *= Number[0];
+        }
+
+        return Power;
+    }
+
+    static void PrintPowerNumbeOfN(int[] Number , int Result)
+    {
+        Console.WriteLine($"The Number {Number[0]} of Power {Number[1]} = {Result} ");
+    }
+
+    #endregion
+
+    #region  Problem 23 Grade A -> F 
+
+    static int ReadGrade()
+    {
+        int Number;
+        Console.WriteLine("Please Enter Your Grade ?");
+        while (!int.TryParse(Console.ReadLine(), out Number) || Number <= 0 || Number >= 100) 
+        {
+            Console.WriteLine("-:( Please Enter A Valid Grade Number And Between ( 0 - 100 ) ?");
+        }
+        return Number;
+    }
+    static char CheckGrade(int Number)
+    {
+        // With If Else  
+        if (Number >= 90)
+            return 'A';
+        else if (Number >= 80)
+            return 'B';
+        else if (Number >= 70)
+            return 'C';
+        else if (Number >= 60)
+            return 'D';
+        else if (Number >= 50)
+            return 'E';
+        else
+            return 'F';
+
+        // With Switch
+
+        switch (Number / 10)
+            {
+                case 10:
+                case 9:
+                    return 'A';
+                case 8:
+                    return 'B';
+                case 7:
+                    return 'C';
+                case 6:
+                    return 'D';
+                case 5:
+                    return 'E';
+                default:
+                    return 'F';
+
+            }
+
+
+    }
+    static void PrintGrade(int Number , char Characrar)
+    {
+        Console.WriteLine($"Your Grade Is {Number} You Are {Characrar}");
+    }
+    #endregion
+
+    #region Problem 24 Commission Percentage
+    static double GetCommissionPercentage(int Number)
+    {
+        int Percentage = 0;
+
+        if (Number > 1000000)
+            return (  0.01);
+        else if (Number > 500000)
+            return (0.02);
+        else if (Number > 100000)
+            return (0.03);
+        else if (Number > 50000)
+            return (Number % 0.05);
+        else
+            return (Number % 0);
+    }
+    static double CalculetPercentage(int Number , double Percentage)
+    {
+            return ( Percentage * Number);
+    }
+    static void PrintCommissionPercentage(int Number, double Commission , double TotaleSales) 
+    {
+        Console.WriteLine($"Your Precentage Is {Number} Your Commission Is {Commission} Totale Sales = {TotaleSales}");
+    }
+    #endregion
+
+    #region Problem 25 Piggy Bank Calculator
+    static int[] ReadMoney()
+    {
+        int[] Money = new int[5];
+        string[] Prompts = { "Peinnies", "Nickels", "Dimes", "Quarters", "Dollars" };
+      
+        for(int i = 0; i < Money.Length; i++)
+        {
+            Console.WriteLine($"How Much Do You Have {Prompts[i]}");
+            Money[i] = Convert.ToInt32(Console.ReadLine());
+        }
+        return Money;
+    }
+    static float CalculetPenny(int[] Number)
+    {
+         int TotalePiennies = Number[0] * 1 + Number[1] * 5 + Number[2] * 10 + Number[3] * 25 + Number[4] *100;
+
+        return TotalePiennies ;
+    }
+
+    static void PrintResultPiggyBank(float Penny)
+    {
+        Console.WriteLine($"You Have {Penny} Pennies \nAnd Have {Penny / 100} Dollars");
+    }
     #endregion
     static void Main(string[] Args)
     {
@@ -769,7 +935,40 @@ class ProblemSolving
 
         //Problem 20 Factorial Of N
 
-        int Number = ReadNumberForLoop();
-        PrintFactorialOfN (Number);
+        //int Number = ReadNumberForLoop();
+
+        //PrintFactorialOfN (Number);
+
+        //Problem 21 Power Of  2 : 2 : 3 
+
+        //int Number = ReadPositiveNumber();
+        //int[] Power = PowerOfNumber(Number);
+        //PrintPowerOf(Power);
+
+        //Problem 22 Power Number Of N 
+
+        //int[] Number = ReadNumberForPower();
+        //int Result = PowerNumberOfN(Number);
+        //PrintPowerNumbeOfN(Number , Result);
+
+        //Problem 23 Check Grade
+
+        //int Number = ReadGrade();
+        //char Characrar = CheckGrade(Number);
+        //PrintGrade(Number , Characrar);
+
+        //Problem 24 Commission Percentage 
+
+        //int Number = ReadPositiveNumber();
+        //double precentage = GetCommissionPercentage(Number);
+        //double TotaleSales = CalculetPercentage(Number, precentage);
+        //PrintCommissionPercentage(Number, precentage, TotaleSales);
+
+        //Problem 25 Piggy Bank Calculator 
+
+        int[] Money = ReadMoney();
+        float Penny = CalculetPenny(Money);
+        PrintResultPiggyBank(Penny);
+
     }
 }
