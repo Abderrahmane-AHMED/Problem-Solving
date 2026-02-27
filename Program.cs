@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Numerics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -333,7 +334,10 @@ class ProblemSolving
         for(int i = 0; i < 2 ; i++)
         {
             Console.WriteLine($"Please Enter Number {i + 1} ?");
-            Number[i] = Convert.ToInt32( Console.ReadLine() );
+            while(!int.TryParse( Console.ReadLine(), out Number[i] ))
+            {
+                Console.WriteLine($":-( Invalid Input Please Enter Number {i} ? )");
+            }
         }
         return Number;
     }
@@ -813,6 +817,200 @@ class ProblemSolving
         Console.WriteLine($"You Have {Penny} Pennies \nAnd Have {Penny / 100} Dollars");
     }
     #endregion
+
+    #region Problem 26 Simple Calculator  Salution 1
+
+    struct  stInfoForCalculator
+    {
+      public int[] Number ;
+     
+
+      public  string OpertionType;
+    }
+    static stInfoForCalculator ReadInfoForCalculator()
+    {
+        stInfoForCalculator Info;
+
+        Info.Number = new int[2];
+  
+        for(int i =0; i < Info.Number.Length; i++)
+        {
+            Console.WriteLine($"Please Enter Number {i + 1} ?");
+
+            while(!int.TryParse(Console.ReadLine(), out Info.Number[i]))
+            {
+                Console.WriteLine($"Invalid :-( Please Enter Number {i + 1} ?");
+            }
+
+            
+        }
+
+        do
+        {
+            Console.WriteLine("Please Enter Operation Type ( * , / , + , - ) ?");
+            Info.OpertionType = Convert.ToString(Console.ReadLine());
+
+        } while (Info.OpertionType != "*" && Info.OpertionType != "/" && Info.OpertionType != "+" && Info.OpertionType != "-");
+
+        return Info;
+
+    }
+    static float CalculateInfo(stInfoForCalculator Info)
+    {
+        if (Info.OpertionType == "*")
+            return Info.Number[0] * Info.Number[1];
+        else if (Info.OpertionType == "/")
+        {
+            while (Info.Number[1] == 0)
+            {
+                Console.WriteLine("Error: Cannot divide by zero. Please enter Number 2 again:");
+
+                while (!int.TryParse(Console.ReadLine(), out Info.Number[1]))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number:");
+                }
+            }
+
+
+            return (float)Info.Number[0] / Info.Number[1];
+        }
+
+        else if (Info.OpertionType == "+")
+            return Info.Number[0] + Info.Number[1];
+        else
+            return Info.Number[0] - Info.Number[1];
+
+    }
+    static void PrintResultSimpleCalculator(stInfoForCalculator Info , float Result)
+    {
+        Console.WriteLine($"Result = {Info.Number[0]} {Info.OpertionType} {Info.Number[1]} = {Result}");
+    }
+    #endregion
+
+    #region Problem 26 Simple Calculator Salution 2 
+    enum enOpertionType { Addition = 1 , Subtraction  =  2 , Multiplication =  3  , Division = 4}
+    static enOpertionType ReadOprationType()
+    {
+        string Operation = "";
+
+       
+       Console.WriteLine("Please Enter Operation Type ( * , / , + , - ) ?");
+        Operation = Console.ReadLine();
+
+        while (Operation != "*" &&  Operation != "/" && Operation != "+" && Operation != "-")
+        {
+          
+
+            Console.WriteLine(":-( Invalid Input Please Enter Operation Type ( * , / , + , - ) ?");
+
+            Operation = Console.ReadLine();
+        }
+
+        if(Operation == "*") 
+            return enOpertionType.Multiplication;
+        else if(Operation == "/")
+            return enOpertionType.Division;
+        else if(Operation == "+")
+            return enOpertionType.Addition;
+        else 
+            return enOpertionType.Subtraction;
+ 
+    }
+
+    static float Calculate2NumberSimple(int[] Number , enOpertionType Operation)
+    {
+
+        switch (Operation)
+        {
+            case enOpertionType.Multiplication:
+                return Number[0] * Number[1];
+            case enOpertionType.Division:
+                while (Number[1] == 0)
+                {
+                    Console.WriteLine("Error: Cannot divide by zero. Please enter Number 2 again:");
+
+                    while (!int.TryParse(Console.ReadLine(), out Number[1]))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number:");
+                    }
+                }
+
+                return (float)Number[0] / Number[1];
+            case enOpertionType.Addition:
+                return Number[0] + Number[1];
+            case enOpertionType.Subtraction:
+
+                return Number[0] - Number[1];
+            default:
+                throw new Exception("Invalid Operation");
+        }
+    }
+    static void PrintResultSimpleCalculatorSalution2(enOpertionType OpertionType, int[] Number , float Result)
+    {
+        Console.WriteLine($"Result = {Number[0]} {OpertionType} {Number[1]} = {Result}");
+    }
+    #endregion
+
+    #region  Problem 27 Sum Number Until You Say No
+
+    static int[] ReadNumberUntilNo()
+    {
+        int[] Number = new int[100]; 
+        string input = "";
+        int count = 0;
+        int sum = 0;
+
+        for (int i = 0; i < Number.Length; i++)
+        {
+            Console.WriteLine($"Please Enter Number {i + 1} (or type 'No' to stop):");
+
+            input = Console.ReadLine();
+
+           
+            if (input == "No" || input == "no")
+            {
+                break; 
+            }
+
+          
+            while (!int.TryParse(input, out Number[i]))
+            {
+                Console.WriteLine($":-( Invalid input. Please enter a valid number for Number {i + 1} (or 'No' to stop):");
+
+                input = Console.ReadLine();
+                if (input == "No" || input == "no")
+                {
+                    goto EndInput;
+                }
+
+            }
+
+          
+        }
+
+    EndInput:
+
+        return Number;
+
+    }
+
+    static int SumNumberUntilNo(int[] Number)
+    {
+        int sum = 0;
+        for(int i = 0;i < Number.Length;i++)
+        {
+            sum += Number[i];
+        }
+        return sum;
+    }
+    static void PrintSumNumberUntilNo(int[] Number )
+    {
+
+           
+        
+      
+    }
+    #endregion
     static void Main(string[] Args)
     {
 
@@ -966,9 +1164,33 @@ class ProblemSolving
 
         //Problem 25 Piggy Bank Calculator 
 
-        int[] Money = ReadMoney();
-        float Penny = CalculetPenny(Money);
-        PrintResultPiggyBank(Penny);
+        //int[] Money = ReadMoney();
+        //float Penny = CalculetPenny(Money);
+        //PrintResultPiggyBank(Penny);
+
+        //Problem 26 Simple Calculator Salution 1
+
+        //stInfoForCalculator Info = new stInfoForCalculator();
+
+        //Info = ReadInfoForCalculator();
+        //float Result = CalculateInfo(Info);
+        //PrintResultSimpleCalculator(Info, Result);
+
+        //Problem 26 Simple Calculator Salution 2
+
+        //int[] Number = new int[2];
+        //Number = Read2Number();
+        //enOpertionType OpertionType = new enOpertionType();
+        //OpertionType = ReadOprationType();
+        //float Result  = Calculate2NumberSimple(Number , OpertionType);
+        //PrintResultSimpleCalculatorSalution2(OpertionType, Number, Result);
+
+
+        //Problem 27  Sum Number Until You Say No
+        int[] Number = new int[100];
+        Number = ReadNumberUntilNo();
+
+        PrintSumNumberUntilNo(Number);
 
     }
 }
