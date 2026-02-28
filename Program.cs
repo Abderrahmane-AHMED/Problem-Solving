@@ -952,63 +952,139 @@ class ProblemSolving
     #endregion
 
     #region  Problem 27 Sum Number Until You Say No
-
-    static int[] ReadNumberUntilNo()
+    static List<int> ReadNumberUntilNo()
     {
-        int[] Number = new int[100]; 
+        List<int> Numbers = new List<int>();
         string input = "";
-        int count = 0;
-        int sum = 0;
+        int TempNum = 0;
+      
 
-        for (int i = 0; i < Number.Length; i++)
+        while (true) 
         {
-            Console.WriteLine($"Please Enter Number {i + 1} (or type 'No' to stop):");
+            Console.WriteLine($"Please Enter Number {Numbers.Count + 1} (or type 'No' to stop):");
 
             input = Console.ReadLine();
 
-           
-            if (input == "No" || input == "no")
+
+            if (input.ToLower() == "no")
             {
-                break; 
+                
+                break;
             }
 
           
-            while (!int.TryParse(input, out Number[i]))
-            {
-                Console.WriteLine($":-( Invalid input. Please enter a valid number for Number {i + 1} (or 'No' to stop):");
 
+            while (!int.TryParse(input, out TempNum))
+            {
+                Console.WriteLine($":-( Invalid input. Please enter a valid number for Number {Numbers.Count + 1} (or 'No' to stop):");
+               
                 input = Console.ReadLine();
-                if (input == "No" || input == "no")
+
+                if (input.ToLower() == "no")
                 {
-                    goto EndInput;
+                    return Numbers;
                 }
-
             }
-
-          
+      
+            
+                Numbers.Add(TempNum);
+           
+           
         }
 
-    EndInput:
 
-        return Number;
+     return Numbers;
+
 
     }
-
-    static int SumNumberUntilNo(int[] Number)
+    static int SumNumberUntilNo(List<int> Numbers)
     {
+
+        int count = 0;
         int sum = 0;
-        for(int i = 0;i < Number.Length;i++)
+
+        for (int i = 0; i < Numbers.Count; i++)
         {
-            sum += Number[i];
+            sum += Numbers[i];
+            count++;
         }
+
         return sum;
     }
-    static void PrintSumNumberUntilNo(int[] Number )
-    {
 
+    static void PrintSumNumberUntilNo(List<int>  numbers , int sum)
+    {
+         Console.WriteLine($"You Are Enter {numbers.Count} Numbers The Sum Of This Number Is {sum}");
+    }
+    #endregion
+
+    #region  Problem 28 Number Is Prime Or Not Prime 
+    enum enPrimeOrNotPrime { Prime = 1 , NotPrime = 0 }
+    static enPrimeOrNotPrime CheckNumberPrimeOrNotPrime(double Number)
+    {
+       
+        double M = Math.Round(Number / 2);
+        for (int i = 2; i <= M; i++)
+        {
+            if (Number % i == 0)
+                return enPrimeOrNotPrime.NotPrime;
+        }
+            return enPrimeOrNotPrime.Prime;
+       
            
         
-      
+    }
+    static void PrintIsPrimeOrNotPrime(double Number , enPrimeOrNotPrime NumberIs)
+    {
+        Console.WriteLine($"Your Number {Number} is {NumberIs}");
+    }
+    #endregion
+
+    #region  ATM PIN
+    static int ReadPINCode()
+    {
+
+        string InputLength ;
+        int TempNumber;
+        Console.WriteLine("Please Enter PIN Code ?");
+     
+
+        while (true)
+        {
+            InputLength = Console.ReadLine();
+
+          
+            if(InputLength.Length == 4 && int.TryParse(InputLength ,out TempNumber))
+            {
+              return TempNumber;  
+            }
+            else
+            
+                Console.WriteLine(":-( Wrong Pin Code Please Enter 4 Number ?");
+         
+        }
+
+       
+        return TempNumber;
+    }
+
+    static void PrintAmount(int Number)
+    {
+        
+        if (Number == 1234)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Your Account balance is 7500 ");
+        }
+        else
+        {
+          
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
+            Console.WriteLine("Wrong PIN Code");
+        }
+        Console.ResetColor();
     }
     #endregion
     static void Main(string[] Args)
@@ -1187,10 +1263,22 @@ class ProblemSolving
 
 
         //Problem 27  Sum Number Until You Say No
-        int[] Number = new int[100];
-        Number = ReadNumberUntilNo();
+       
+        //List<int> numbers = new List<int>();
+        //numbers = ReadNumberUntilNo();
+        //int sum = SumNumberUntilNo(numbers);
+        //PrintSumNumberUntilNo(numbers , sum);
 
-        PrintSumNumberUntilNo(Number);
+        //Problem 28 Number Is Prime Or Not Prime 
+        //int Number = ReadPositiveNumber();
+        //enPrimeOrNotPrime NumberIs = CheckNumberPrimeOrNotPrime (Number);
+        //PrintIsPrimeOrNotPrime(Number , NumberIs);
+
+        //Problem 29 ATM PIN Code
+
+        int Number = ReadPINCode();
+        PrintAmount(Number);
+       
 
     }
 }
